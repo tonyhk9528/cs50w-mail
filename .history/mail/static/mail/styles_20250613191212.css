@@ -1,0 +1,20 @@
+textarea {
+    min-height: 400px;
+}
+
+body {
+    padding: 10px;
+}
+
+.view-email{
+    font-weight: bold;
+    padding-right: 1rem;
+}
+
+.view-subject{
+    
+}
+
+.view-timestamp{
+    color: lightgrey;
+}
