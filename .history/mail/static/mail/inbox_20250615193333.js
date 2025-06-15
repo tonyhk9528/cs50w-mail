@@ -127,8 +127,8 @@ function reply_email(id){
   
         // Pre-fill form
         document.querySelector('#compose-recipients').value = email.sender;
-        document.querySelector('#compose-subject').value = `Re: ${email.subject}`;
-        document.querySelector('#compose-body').value = `On ${email.timestamp} ${email.sender} wrote: ${email.body}\n\n`;
+        document.querySelector('#compose-subject').value = email.;
+        document.querySelector('#compose-body').value = '';
     });
   
 

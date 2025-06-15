@@ -28,7 +28,6 @@ function compose_email() {
   document.querySelector('#compose-recipients').value = '';
   document.querySelector('#compose-subject').value = '';
   document.querySelector('#compose-body').value = '';
-
 }
 
 function load_mailbox(mailbox) {
@@ -108,32 +107,6 @@ function send_email() {
   });
 }
 
-function reply_email(id){
-    // Show compose view and hide other views
-    document.querySelector('#emails-view').style.display = 'none';
-    document.querySelector('#email-view').style.display = 'none';
-    document.querySelector('#compose-view').style.display = 'block';
-  
-    // Clear out composition fields
-    document.querySelector('#compose-recipients').value = '';
-    document.querySelector('#compose-subject').value = '';
-    document.querySelector('#compose-body').value = '';
-
-    fetch(`/emails/${id}`)
-    .then(response => response.json())
-    .then(email => {
-        // Print email
-        console.log(email);
-  
-        // Pre-fill form
-        document.querySelector('#compose-recipients').value = email.sender;
-        document.querySelector('#compose-subject').value = `Re: ${email.subject}`;
-        document.querySelector('#compose-body').value = `On ${email.timestamp} ${email.sender} wrote: ${email.body}\n\n`;
-    });
-  
-
-}
-
 function open_email(id){
   // Show email view and hide other views
   document.querySelector('#emails-view').style.display = 'none';
@@ -168,10 +141,6 @@ function open_email(id){
 
   })
 
-  document.querySelector('#reply-btn').addEventListener('click', function() {
-    reply_email(id);
-  })
-
   fetch(`/emails/${id}`, {
     method: 'PUT',
     body: JSON.stringify({
@@ -194,7 +163,6 @@ function open_email(id){
     document.querySelector('.ed-to').innerHTML = `<strong>To:</strong> ${email.recipients}`;
     document.querySelector('.ed-subject').innerHTML = `<strong>Subject:</strong> ${email.subject}`;
     document.querySelector('.ed-timestamp').innerHTML = `<strong>Timestamp:</strong> ${email.timestamp}`;
-    document.querySelector('.ed-email-subject').innerHTML = email.subject;
     document.querySelector('.ed-email-text').innerHTML = email.body;
 
     if (email.archived){
